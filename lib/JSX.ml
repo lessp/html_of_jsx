@@ -62,12 +62,16 @@ let to_string element =
         Buffer.add_string buffer
           (Printf.sprintf "<!DOCTYPE html><%s%s>" tag
              (Attribute.to_string attributes));
+
         List.iter render_element children;
+
         Buffer.add_string buffer (Printf.sprintf "</%s>" tag)
     | Node { tag; attributes; children } ->
         Buffer.add_string buffer
           (Printf.sprintf "<%s%s>" tag (Attribute.to_string attributes));
+
         List.iter render_element children;
+
         Buffer.add_string buffer (Printf.sprintf "</%s>" tag)
     | String text -> Buffer.add_string buffer (Html.encode text)
     | Unsafe text -> Buffer.add_string buffer text
